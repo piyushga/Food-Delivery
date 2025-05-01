@@ -2,6 +2,7 @@ import ResturantCard from "./ResturantCard";
 import resList from "../utils/mockData";
 import { useState } from "react";
 import { useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   //State variable
@@ -31,6 +32,10 @@ const Body = () => {
         ?.restaurants
     );
   };
+
+  if (listOfResturants.length === 0) {
+    return <Shimmer />;
+  }
 
   return (
     <div className="Body">
