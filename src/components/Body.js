@@ -7,7 +7,7 @@ import Shimmer from "./Shimmer";
 const Body = () => {
   //State variable
   const [listOfResturants, setListOfResturants] = useState([]);
-  const [searchResturant, setSearchResturant] = useState([]);
+  const [filteredResturant, setfilteredResturant] = useState([]);
   const [searchText, setSearchText] = useState("");
 
   console.log("Body Rendered");
@@ -17,6 +17,7 @@ const Body = () => {
     data();
   }, []);
 
+  // Fetching data from Swiggy API
   const data = async () => {
     const foodData = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.047399&lng=73.0697805&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
@@ -36,11 +37,32 @@ const Body = () => {
         ?.restaurants
     );
 
-    setSearchResturant(
+    setfilteredResturant(
       resLists?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
   };
+
+  // Handle Search Functionality
+  function handleSearch() {
+    console.log(searchText);
+
+    const searchList = listOfResturants.filter((res) =>
+      res.info.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    setfilteredResturant(searchList);
+  }
+
+  // Handle Top Rated Resturant List
+  function topRatedResturant() {
+    const topRatedList = listOfResturants.filter(
+      (res) => res.info.avgRating > 4.3
+    );
+
+    console.log("Button click: ", topRatedList);
+    setfilteredResturant(topRatedList);
+  }
 
   return listOfResturants.length === 0 ? (
     <Shimmer />
@@ -56,36 +78,14 @@ const Body = () => {
               setSearchText(e.target.value);
             }}
           />
-          <button
-            onClick={() => {
-              console.log(searchText);
-
-              const searchList = listOfResturants.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-
-              setSearchResturant(searchList);
-            }}
-          >
-            Search
-          </button>
+          <button onClick={handleSearch}>Search</button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            const topRatedList = listOfResturants.filter(
-              (res) => res.info.avgRating > 4.3
-            );
-
-            console.log("Button click: ", topRatedList);
-            setSearchResturant(topRatedList);
-          }}
-        >
+        <button className="filter-btn" onClick={topRatedResturant}>
           Top Rated Restaurants
         </button>
       </div>
       <div className="res-container">
-        {searchResturant.map((resturant) => (
+        {filteredResturant.map((resturant) => (
           <ResturantCard key={resturant.info.id} resData={resturant} />
         ))}
       </div>
