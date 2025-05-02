@@ -81,3 +81,7 @@
 .login{
     height: 60px;
 }
+
+.filter{
+    display: flex;
+}
