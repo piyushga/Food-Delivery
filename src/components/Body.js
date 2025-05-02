@@ -20,7 +20,7 @@ const Body = () => {
   // Fetching data from Swiggy API
   const data = async () => {
     const foodData = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.047399&lng=73.0697805&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.047399&lng=73.0697805&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const resLists = await foodData.json();
