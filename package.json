@@ -20,13 +20,14 @@
   "homepage": "https://github.com/piyushga/Namaste-React#readme",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.30.0"
   },
   "devDependencies": {
     "parcel": "^2.8.3",
     "process": "^0.11.10"
   },
-  "browserslists":[
+  "browserslists": [
     "last 2 versions"
   ]
 }
