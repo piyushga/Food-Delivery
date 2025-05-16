@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useNetworkStatus from "../utils/useNetworkStatus";
 
 const Body = () => {
   //State variable
@@ -64,6 +65,9 @@ const Body = () => {
     console.log("Button click: ", topRatedList);
     setfilteredResturant(topRatedList);
   }
+  const onlineStatus = useNetworkStatus();
+  if (onlineStatus === false)
+    return <h1>Looks like you are not connected to internet!!!! </h1>;
 
   return listOfResturants.length === 0 ? (
     <Shimmer />
