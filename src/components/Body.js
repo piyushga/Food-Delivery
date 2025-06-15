@@ -28,21 +28,20 @@ const Body = () => {
     const resLists = await foodData.json();
     console.log("Response body: ", resLists);
 
-    console.log(
-      "Resturants Lists: ",
-      resLists?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
+    //Dynamically Handling. It goes throigh each item in array and looks for the first card that has this path
+    const restaurantsCard = resLists?.data?.cards?.find(
+      (item) => item?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    console.log("Resturant Cards: ", restaurantsCard);
 
-    setListOfResturants(
-      resLists?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+    const restaurants =
+      restaurantsCard?.card?.card?.gridElements?.infoWithStyle?.restaurants ||
+      [];
 
-    setfilteredResturant(
-      resLists?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+    console.log("Resturants: ", restaurants);
+
+    setListOfResturants(restaurants);
+    setfilteredResturant(restaurants);
   };
 
   // Handle Search Functionality
@@ -73,23 +72,33 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="Body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button
+            className="px-4 py-1 bg-green-100 m-4 rounded-lg"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
         </div>
-        <button className="filter-btn" onClick={topRatedResturant}>
-          Top Rated Restaurants
-        </button>
+        <div className="search m-2 flex items-center">
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg"
+            onClick={topRatedResturant}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {filteredResturant.map((resturant) => (
           <Link key={resturant.info.id} to={"/resturants/" + resturant.info.id}>
             <ResturantCard resData={resturant} />
