@@ -13,13 +13,13 @@ const ResturantCard = (props) => {
   } = resData?.info;
 
   return (
-    <div className="m-4 w-[280px] bg-blue-50 rounded-lg h-[380px] font-poppins">
+    <div className="m-4 w-[280px] bg-gray-50 rounded-lg h-[380px] font-poppins hover:bg-gray-300">
       <img
         className="w-[280px] h-[230px] rounded-lg"
         alt="food-item"
         src={CDN_IMAGE_URL + cloudinaryImageId}
       />
-      <div class="p-2 flex justify-between">
+      <div className="p-2 flex justify-between">
         <h3 className="font-sans font-bold py-2 truncate">{name}</h3>
         <div className="flex items-center h-5 mt-2 bg-green-700 text-white px-2 rounded">
           <span className="text-sm font-medium">{avgRating}</span>
