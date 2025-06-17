@@ -1,4 +1,4 @@
-import ResturantCard from "./ResturantCard";
+import ResturantCard, { vegLabel } from "./ResturantCard";
 import resList from "../utils/mockData";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -13,8 +13,9 @@ const Body = () => {
   const [filteredResturant, setfilteredResturant] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [categories, setCategories] = useState([]);
+  const VegResturantComponent = vegLabel(ResturantCard);
 
-  console.log("Body Rendered");
+  console.log("Body Rendered", filteredResturant);
 
   useEffect(() => {
     console.log("Use effect Called");
@@ -80,7 +81,7 @@ const Body = () => {
     <div className="Body">
       <div className="mx-8 my-4 font-bold text-sm">What's on your Mind</div>
       <div className="flex flex-wrap justify-center">
-        {categories.slice(0, 11).map((item) => (
+        {(categories || []).slice(0, 11).map((item) => (
           <Categories key={item.id} categoryData={item} />
         ))}
       </div>
@@ -117,7 +118,11 @@ const Body = () => {
       <div className="flex flex-wrap justify-center">
         {filteredResturant.map((resturant) => (
           <Link key={resturant.info.id} to={"/resturants/" + resturant.info.id}>
-            <ResturantCard resData={resturant} />
+            {resturant?.info?.veg === true ? (
+              <VegResturantComponent resData={resturant} />
+            ) : (
+              <ResturantCard resData={resturant} />
+            )}
           </Link>
         ))}
       </div>

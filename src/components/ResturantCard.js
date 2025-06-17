@@ -21,7 +21,7 @@ const ResturantCard = (props) => {
       />
       <div className="p-2 flex justify-between">
         <h3 className="font-sans font-bold py-2 truncate">{name}</h3>
-        <div className="flex items-center h-5 mt-2 bg-green-700 text-white px-2 rounded">
+        <div className="flex items-center h-5 mt-2 bg-black text-white px-2 rounded">
           <span className="text-sm font-medium">{avgRating}</span>
           <span className="ml-1 text-white">★</span>
         </div>
@@ -31,6 +31,19 @@ const ResturantCard = (props) => {
       <h4 className="p-2 leading-none">{costForTwo}</h4>
     </div>
   );
+};
+
+export const vegLabel = (ResturantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className=" bg-green-700 text-white rounded px-4 py-1 absolute ml-4">
+          Veg
+        </label>
+        <ResturantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default ResturantCard;
