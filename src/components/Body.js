@@ -71,6 +71,12 @@ const Body = () => {
     console.log("Button click: ", topRatedList);
     setfilteredResturant(topRatedList);
   }
+
+  function vegResturant() {
+    const vegList = listOfResturants.filter((res) => res?.info?.veg === true);
+    console.log("Veg resturant List: ", vegList);
+    setfilteredResturant(vegList);
+  }
   const onlineStatus = useNetworkStatus();
   if (onlineStatus === false)
     return <h1>Looks like you are not connected to internet!!!! </h1>;
@@ -109,6 +115,14 @@ const Body = () => {
             onClick={topRatedResturant}
           >
             Top Rated Restaurants
+          </button>
+        </div>
+        <div className="search m-2 flex items-center">
+          <button
+            className="px-4 py-2 bg-green-700 text-white rounded-lg"
+            onClick={vegResturant}
+          >
+            Veg
           </button>
         </div>
       </div>

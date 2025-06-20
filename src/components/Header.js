@@ -1,11 +1,15 @@
 import logo from "../images/logo.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import useNetworkStatus from "../utils/useNetworkStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [loginBtn, setLoginBtn] = useState("Login");
   const onlineStatus = useNetworkStatus();
+
+  const data = useContext(UserContext);
+  console.log(data);
 
   return (
     <div className="flex justify-between bg-amber-100 shadow-lg m-2">
@@ -31,7 +35,7 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <button
-            className="login"
+            className="mx-4"
             onClick={() => {
               loginBtn === "Login"
                 ? setLoginBtn("Logout")
@@ -40,6 +44,7 @@ const Header = () => {
           >
             {loginBtn}
           </button>
+          <li className="mx-4">{data?.loggedInUser}</li>
         </ul>
       </div>
     </div>
