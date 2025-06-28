@@ -1,7 +1,14 @@
+import { useDispatch } from "react-redux";
 import { ITEM_IMG } from "../utils/constants";
+import { addItem } from "../utils/cartSlice";
 
 const MenuList = (props) => {
   const { items } = props;
+
+  const dispatch = useDispatch();
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
   return (
     <div>
       {items.map((item) => (
@@ -21,7 +28,12 @@ const MenuList = (props) => {
           </div>
           <div className="w-2/12 relative ">
             <div className="absolute">
-              <button className="bg-black text-white px-2 py-1">Add</button>
+              <button
+                className="bg-black text-white px-2 py-1"
+                onClick={() => handleAddItem(item)}
+              >
+                Add
+              </button>
             </div>
             <img
               src={ITEM_IMG + item?.card?.info?.imageId}

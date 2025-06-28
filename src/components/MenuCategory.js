@@ -2,12 +2,11 @@ import { useState } from "react";
 import MenuList from "./MenuList";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
-const MenuCategory = ({ data, showItems, setShowIndex }) => {
-  // const [showItems, setShowItems] = useState(false);
+const MenuCategory = ({ data }) => {
+  const [showItems, setShowItems] = useState(false);
   const openAccordion = () => {
-    // if (showItems === true) setShowItems(false);
-    // else setShowItems(true);
-    setShowIndex();
+    setShowItems(!showItems);
+    // setShowIndex();
   };
 
   return (

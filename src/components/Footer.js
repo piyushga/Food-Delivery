@@ -2,7 +2,8 @@ const Footer = () => {
   return (
     <footer style={styles.footer}>
       <p>
-        &copy; {new Date().getFullYear()} Your Website. All rights reserved.
+        Copyright &copy; {new Date().getFullYear()} Piyush Food Delivery. All
+        rights reserved.
       </p>
     </footer>
   );
