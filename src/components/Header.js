@@ -32,11 +32,13 @@ const Header = () => {
           <li className="mx-4">
             <Link to="/about">About Us</Link>
           </li>
-          <li className="mx-4">
+          {/* <li className="mx-4">
             <Link to="/contact">Contact Us</Link>
-          </li>
+          </li> */}
           <li className="mx-4 ">
-            <Link to="/cart">Cart- {cartItems.length}</Link>
+            <Link to="/cart">
+              Cart- <strong>{cartItems.length}</strong>
+            </Link>
           </li>
           <li className="mx-4">
             <Link to="/grocery">Grocery</Link>
